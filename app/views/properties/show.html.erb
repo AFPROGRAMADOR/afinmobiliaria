@@ -1,0 +1,12 @@
+<h1><%= @property.title %></h1>
+
+<p><strong>Descripción:</strong> <%= @property.description %></p>
+<p><strong>Precio:</strong> $<%= @property.price %></p>
+<p><strong>Ubicación:</strong> <%= @property.location %></p>
+<p><strong>Estado:</strong> <%= @property.status.capitalize %></p>
+<% if @property.image_url.present? %>
+  <p><img src="<%= @property.image_url %>" alt="<%= @property.title %>" style="max-width: 100%;"></p>
+<% end %>
+
+<%= link_to "Editar", edit_property_path(@property), class: "btn btn-secondary" %>
+<%= link_to "Volver", properties_path, class: "btn btn-primary" %>

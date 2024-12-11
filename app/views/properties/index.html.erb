@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Propiedades</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+ 
+</head>
+<body class="properties-page">
+
+  <!-- Contenido Principal -->
+  <div class="container properties-page">
+    <h2>Mis Propiedades</h2>
+    <div class="row">
+      <% @properties.each do |property| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="<%= property.image_url || 'https://via.placeholder.com/500x300' %>" class="card-img-top" alt="<%= property.title %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= property.title %></h5>
+              <p class="card-text"><%= property.description %></p>
+              <a href="<%= property_path(property) %>" class="btn btn-primary">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>

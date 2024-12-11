@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @property.new_record? ? 'Crear Propiedad' : 'Editar Propiedad' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <!-- Menú de Navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Inmobiliaria</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/properties">Propiedades</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Formulario de Propiedad -->
+  <div class="container mt-5">
+    <h2><%= @property.new_record? ? 'Crear Propiedad' : 'Editar Propiedad' %></h2>
+    <%= form_with(model: @property, local: true) do |form| %>
+      <div class="mb-3">
+        <%= form.label :title, "Título" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :description, "Descripción" %>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :image, "Imagen de portada" %>
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :location, "Ubicación (Google Maps)" %>
+        <%= form.text_field :location, class: "form-control", placeholder: "Introduce la URL de Google Maps" %>
+      </div>
+
+      <%= form.submit "Guardar", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center p-3 mt-5">
+    <p>&copy; 2024 Inmobiliaria. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
