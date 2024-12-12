@@ -2,45 +2,16 @@
 <p class="lead text-center">Explora propiedades destacadas y encuentra la casa de tus sueños.</p>
 
 <div class="row">
-  <!-- Propiedad 1 -->
-  <div class="col-md-4 mb-4">
-    <div class="card">
-      <img src="https://via.placeholder.com/500x300?text=Propiedad+1" class="card-img-top" alt="Propiedad 1">
-      <div class="card-body">
-        <h5 class="card-title">Casa en la Playa</h5>
-        <p class="card-text">Hermosa casa frente al mar con vistas espectaculares.</p>
-        <a href="#" class="btn btn-primary">Ver detalles</a>
+  <% @properties.each do |property| %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <%= image_tag property.image.attached? ? url_for(property.image) : "https://via.placeholder.com/500x300?text=Propiedad", class: "card-img-top", alt: property.title %>
+        <div class="card-body">
+          <h5 class="card-title"><%= property.title %></h5>
+          <p class="card-text"><%= truncate(property.description, length: 100) %></p>
+          <a href="<%= property_path(property) %>" class="btn btn-primary">Ver detalles</a>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Propiedad 2 -->
-  <div class="col-md-4 mb-4">
-    <div class="card">
-      <img src="https://via.placeholder.com/500x300?text=Propiedad+2" class="card-img-top" alt="Propiedad 2">
-      <div class="card-body">
-        <h5 class="card-title">Apartamento Moderno</h5>
-        <p class="card-text">Apartamento con acabados modernos en el centro de la ciudad.</p>
-        <a href="#" class="btn btn-primary">Ver detalles</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Propiedad 3 -->
-  <div class="col-md-4 mb-4">
-    <div class="card">
-      <img src="https://via.placeholder.com/500x300?text=Propiedad+3" class="card-img-top" alt="Propiedad 3">
-      <div class="card-body">
-        <h5 class="card-title">Oficina Comercial</h5>
-        <p class="card-text">Oficina ideal para negocios, en zona comercial de alto tránsito.</p>
-        <a href="#" class="btn btn-primary">Ver detalles</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Botones de Acción -->
-<div class="mt-5 text-center">
-  <a href="/login" class="btn btn-secondary">Iniciar sesión</a>
-  <a href="/signup" class="btn btn-success">Registrarse</a>
+  <% end %>
 </div>

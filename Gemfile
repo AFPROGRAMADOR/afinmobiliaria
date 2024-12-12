@@ -39,6 +39,12 @@ gem "thruster", require: false
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'  # O cualquier otro proveedor que necesites, como 'omniauth-google-oauth2', etc.
+gem 'activerecord'
+
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

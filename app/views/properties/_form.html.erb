@@ -3,34 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @property.new_record? ? 'Crear Propiedad' : 'Editar Propiedad' %></title>
+  <title>Propiedad</title> <!-- Cambié el título -->
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <!-- Menú de Navegación -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Inmobiliaria</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/properties">Propiedades</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <!-- Formulario de Propiedad -->
   <div class="container mt-5">
-    <h2><%= @property.new_record? ? 'Crear Propiedad' : 'Editar Propiedad' %></h2>
+    <h2></h2> <!-- el encabezado -->
     <%= form_with(model: @property, local: true) do |form| %>
       <div class="mb-3">
         <%= form.label :title, "Título" %>
@@ -52,13 +32,28 @@
         <%= form.text_field :location, class: "form-control", placeholder: "Introduce la URL de Google Maps" %>
       </div>
 
+      <div class="mb-3">
+        <%= form.label :price, "Precio" %>
+        <%= form.text_field :price, class: "form-control" %>
+        <% if @property.errors[:price].any? %>
+          <div class="text-danger">
+            <%= @property.errors[:price].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :status, "Estado" %>
+        <%= form.text_field :status, class: "form-control" %>
+        <% if @property.errors[:status].any? %>
+          <div class="text-danger">
+            <%= @property.errors[:status].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
       <%= form.submit "Guardar", class: "btn btn-primary" %>
     <% end %>
   </div>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center p-3 mt-5">
-    <p>&copy; 2024 Inmobiliaria. Todos los derechos reservados.</p>
-  </footer>
 </body>
 </html>

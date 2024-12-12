@@ -1,8 +1,8 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :omniauthable
     has_many :properties, dependent: :destroy
-    has_secure_password
-
-    validates :name, presence: true
+    validates :name, presence: false
     validates :email, presence: true, uniqueness: true
-
+    validates :password, presence: true, length: { minimum: 4 }
 end 

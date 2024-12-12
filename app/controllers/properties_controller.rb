@@ -1,5 +1,6 @@
 class PropertiesController < ApplicationController
-    before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+  before_action :set_property, only: [:show, :edit, :update, :destroy]
   
     # Lista de propiedades
     def index
@@ -17,13 +18,16 @@ class PropertiesController < ApplicationController
   
     # Guardar la nueva propiedad
     def create
-      @property = current_user.properties.build(property_params) # Asociar al usuario actual
+      @property = current_user.properties.build(property_params)
       if @property.save
         redirect_to @property, notice: 'Propiedad creada exitosamente.'
       else
+        # Mostrar los errores si la propiedad no se guarda
+        flash.now[:alert] = @property.errors.full_messages.join(", ")
         render :new
       end
     end
+    
   
     # Formulario para editar una propiedad existente
     def edit
@@ -53,7 +57,7 @@ class PropertiesController < ApplicationController
   
     # Permitir solo parámetros seguros
     def property_params
-      params.require(:property).permit(:title, :description, :price, :location, :status, :image_url)
+      params.require(:property).permit(:title, :description, :price, :location, :status, :image)
     end
   end
   
